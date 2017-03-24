@@ -1,0 +1,21 @@
+
+html, body, #root {
+  height: 100%;
+}
+
+#root > div {
+  margin: 10px;
+}
+
+#submit{
+  float: right;
+  margin-right: 0%;
+}
+
+h3 {
+  text-align: right;
+}
+
+.ant-col-10 {
+  vertical-align: middle;
+}
