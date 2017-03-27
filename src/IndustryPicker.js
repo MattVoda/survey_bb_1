@@ -1,14 +1,19 @@
 import React, { Component } from "react";
-import { Menu, Dropdown, Icon } from "antd";
+import { Menu, Dropdown, Icon, message } from "antd";
+
+function handleMenuClick (event) {
+  message.success(`${event.item.props.industry} industry chosen `);
+  console.log(event);
+}
 
 const SubMenu = Menu.SubMenu;
 const menu = (
-  <Menu>
-    <Menu.Item>Automotive</Menu.Item>
-    <Menu.Item>Insurance</Menu.Item>
-    <SubMenu title="Finance">
-      <Menu.Item>Banking</Menu.Item>
-      <Menu.Item>Fin Tech</Menu.Item>
+  <Menu onClick={ handleMenuClick }>
+    <Menu.Item industry="Automotive">Automotive</Menu.Item>
+    <Menu.Item industry="Insurance">Insurance</Menu.Item>
+    <SubMenu title="Finance" industry="Finance">
+      <Menu.Item industry="Banking">Banking</Menu.Item>
+      <Menu.Item industry="Fin Tech">Fin Tech</Menu.Item>
     </SubMenu>
   </Menu>
 );
@@ -16,9 +21,9 @@ const menu = (
 export default class IndustryPicker extends Component {
   render() {
     return (
-      <Dropdown overlay={menu}>
-        <a className="ant-dropdown-link" href="#">
-          Select Industry <Icon type="down" />
+      <Dropdown overlay={ menu } >
+        <a className="ant-dropdown-link" id="industryPickerDisplay" href="#">
+         Select Industry <Icon type="down" />
         </a>
       </Dropdown>
     );
