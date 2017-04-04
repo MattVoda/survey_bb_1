@@ -1,10 +1,14 @@
-import React, { Component } from "react";
-import IndustryPicker from "./IndustryPicker";
-import SliderInput1 from "./SliderInput";
-import RadioInput1 from "./RadioInput1";
-import { InputNumber, Row, Col } from "antd";
+import React, {Component} from 'react';
+import IndustryPicker from './IndustryPicker';
+import SliderInput1 from './SliderInput';
+import RadioInput1 from './RadioInput1';
+import {InputNumber, Row, Col, message} from 'antd';
+import {connect} from 'react-redux';
+import { qResponsed } from '../actions/Actions_ALL';
+function handleMenuClick (event) {
 
-export default class SurveyQs extends Component {
+}
+class SurveyQs extends Component {
   render() {
     return (
       <div>
@@ -26,7 +30,10 @@ export default class SurveyQs extends Component {
           </Col>
           <Col span={2} />
           <Col span={12}>
-            <IndustryPicker />
+            <IndustryPicker handleMenuClick={({key: answer}) => {
+                message.success(`${answer} industry chosen `);
+                this.props.answerQuestion({id: 1, answer });
+            }} />
           </Col>
         </Row>
         <br /><br />
@@ -53,3 +60,24 @@ export default class SurveyQs extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  answerQuestion: ({id, answer}) => dispatch(qResponsed({id, answer}))
+});
+
+// var mapDispatchToProps = function(dispatch) {
+//   return {
+//     answerQuestion: function(data) {
+//       var id = data.id;
+//       var answer = data.answer;
+//       return dispatch(qResponsed({id: id, answer: answer}));
+//     }
+//   }
+// }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SurveyQs);
